@@ -24,10 +24,15 @@ Each player turns up a card at the same time and the player with the higher card
 1) Define required constants
     - 1.1 define players (one and two[computer?])
     - 1.2 define how to win (playerOneCard > player2card) || (player2card > player1card)
+    - 1.3 define deck
+        1.3.1 show the deck
+        1.3.2 shuffle the deck
+        1.3.3 divide the deck  
 
 2) Define required variables used to track the state of the game
-    - 2.1 use an array to iterate through the deck 
-    - 2.2 define varible turn to determine whos turn it is to show a card
+    - 2.0 redefine each players half deck
+    - 2.1 define varible turn to determine whos turn it is to show a card  
+    - 2.2 use an array to iterate through the half deck 
     - 2.3 define var to dertemine who wins the hand and adds it to their score
     - 2.4 define var to keep score
 
@@ -44,6 +49,7 @@ Each player turns up a card at the same time and the player with the higher card
         - 3.4.2 store score for game to dertemine winneer
     - 3.5 store win logic
         - 3.5.1 store function to determine value of each card
+        -     3.5.2 store flipped card
         - 3.5.2 store function to determine which value is greater
 
 4) Upon loading the app should:
