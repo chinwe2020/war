@@ -1,75 +1,102 @@
 /*----- constants -----*/
-const player = {
+// const player = {
 
-    'playerOne': {
-            name: '',
-            score: 0
-    },
+//     'playerOne': {
+//             name: '',
+//             score: 0
+//     },
 
-    'playerTwo': {
-            name: '',
-            score: 0
-    }
-}
+//     'playerTwo': {
+//             name: '',
+//             score: 0
+//     }
+// }
 
 const suits = ['s', 'c', 'd', 'h'];
 const ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
 // Build a 'master' deck of 'card' objects used to create shuffled decks
 
-const deck1 = getDeck();
-
-
+const masterDeck = buildMasterDeck();
 
 /*----- app's state (variables) -----*/
 
-let shuffledDeck;
+let shuffledDeck = cardShuffle(masterDeck);
 
-let cardsInPlay = [];
+// let turn;
 
-let turn = {
+// let winner;
 
-}
-
-let winner = {
-
-}
-
-let score = {
-
-}
+// let score; 
 
 /*----- cached element references -----*/
 
-
-
+// const cardContainer = document.getElementById('card1')
 
 /*----- event listeners -----*/
-
+// document.querySelector('dealButtonOne').addEventListener('click', renderCardInContainer);
 
 
 /*----- functions -----*/
 
 
-function getDeck() {
+
+
+// function renderCardInContainer() {
+
+//      document.getElementById("card1").innerHTML = "";
+  
+//       for(let i = 0; i < deck1.length; i++)
+//       {
+//           let randomCard = document.createElement("div");
+//           let value = document.createElement("div");
+//           let suit = document.createElement("div");
+//           randomCard.className = "randomCard";
+//           value.className = "value";
+//           suit.className = "suit " + deck1[i].Suit;
+  
+//           value.innerHTML = deck1[i].Value;
+//           randomCard.appendChild(value);
+//           randomCard.appendChild(suit);
+  
+//           document.getElementById("card1").appendChild(randomCard);
+//       }
+
+      
+
+//   }
+  
+// function renderShuffledCard() {
+//     for (let i = 0, i < shuffledDeck.length, i++ ) {
+
+//     }
+// }
+
+function cardShuffle(arr) {
+    let newPos,
+        temp;
+
+    for(i = arr.length - 1; i > 0; i--) {
+        newPos = Math.floor(Math.random() * (i + 1));
+        temp = arr[i];
+        arr[i] = arr[newPos];
+        arr[newPos] = temp;
+    }
+    return arr;
+}
+
+
+
+function buildMasterDeck() {
     const deck = [];
 	suits.forEach(function(suit) {
         ranks.forEach(function(rank) {
           deck.push({
-            card: `${suit}${rank}`,
+            face: `${suit}${rank}`,
+            value: Number(rank)
           });
         });
       });
       return deck;
     }
 
-function shuffle(deck) {
-    // switch the values of two random cards 1000 times
-    for (let i = 0; i < 1000; i++) {
-        var location1 = Math.floor((Math.random() * deck.length));
-        var location2 = Math.floor((Math.random() * deck.length));
-        var tmp = deck[location1];
-    
-            deck[location1] = deck[location2];
-            deck[location2] = tmp;
-        }
-    }
+// renderCard();
