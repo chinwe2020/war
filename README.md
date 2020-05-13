@@ -47,7 +47,7 @@ Each player turns up a card at the same time and the player with the higher card
         - 3.3.4 loop back to 3.3.1 logic
     - 3.4 store score
         - 3.4.1 store score for each hand
-        - 3.4.2 store score for game to dertemine winneer
+        - 3.4.2 store score for game to dertemine winner
     - 3.5 store win logic
         - 3.5.1 determine number of cards in each deck
         - 3.5.2 store function to determine value of each card

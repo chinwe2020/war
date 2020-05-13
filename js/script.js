@@ -20,7 +20,9 @@ const masterDeck = buildMasterDeck();
 
 /*----- app's state (variables) -----*/
 
-let shuffledDeck = cardShuffle(masterDeck);
+let shuffledDeck = [cardShuffle(masterDeck)];
+
+let card = renderShuffledCard();
 
 // let turn;
 
@@ -30,10 +32,10 @@ let shuffledDeck = cardShuffle(masterDeck);
 
 /*----- cached element references -----*/
 
-// const cardContainer = document.getElementById('card1')
+const cardContainerOne = document.getElementById('card1')
 
 /*----- event listeners -----*/
-// document.querySelector('dealButtonOne').addEventListener('click', renderCardInContainer);
+document.querySelector('dealButtonOne').addEventListener('click', renderCardInContainer);
 
 
 /*----- functions -----*/
@@ -41,35 +43,25 @@ let shuffledDeck = cardShuffle(masterDeck);
 
 
 
-// function renderCardInContainer() {
+function renderCardInContainer() {
 
-//      document.getElementById("card1").innerHTML = "";
+    //  cardContainerOne
   
-//       for(let i = 0; i < deck1.length; i++)
-//       {
-//           let randomCard = document.createElement("div");
-//           let value = document.createElement("div");
-//           let suit = document.createElement("div");
-//           randomCard.className = "randomCard";
-//           value.className = "value";
-//           suit.className = "suit " + deck1[i].Suit;
-  
-//           value.innerHTML = deck1[i].Value;
-//           randomCard.appendChild(value);
-//           randomCard.appendChild(suit);
-  
-//           document.getElementById("card1").appendChild(randomCard);
-//       }
-
       
-
-//   }
+          
+  }
   
-// function renderShuffledCard() {
-//     for (let i = 0, i < shuffledDeck.length, i++ ) {
+function renderShuffledCard() {
 
-//     }
-// }
+      let renderCard = [];
+
+      for (let i = 0; i < shuffledDeck.length; i++) {
+            return renderCard.push(shuffledDeck[0])
+  }
+
+return renderCard;
+}
+    
 
 function cardShuffle(arr) {
     let newPos,
