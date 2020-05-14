@@ -15,22 +15,30 @@
         <div class="playerTwo">Player 2:</div>
     </section>
     <main class="gameBoard">
+
         <div class="backCard">
             <img src="./images/card-deck-css/images/backs/red.svg" alt="Player One Deck" id="leftDeck">
             <button class="dealButtonOne">DEAL CARD</button>
         </div>
-        <div class="card">
+
+        <div class="card" id="faceCard">
             <section class="face-container" id="card1" ></section>
         </div>
+
         <div class="backCard">
             <img src="./images/card-deck-css/images/backs/red.svg" alt="mainDeck" id="mainDeck">
-            <button class="shuffle">SHUFFLE DECK</button>
+            <button class="shuffle" id="shuffle">START</button>
         </div>
-        <div class="card"></div>
+
+        <div class="card" id="faceCard">
+            <section class="face-container" id="card2" ></section>
+        </div>
+
         <div class="backCard">
             <img src="./images/card-deck-css/images/backs/red.svg" alt="Player Two Deck" id="rightDeck">
-            <button class="deal">DEAL CARD</button>
+            <button class="dealButtonTwo">DEAL CARD</button>
         </div>
+
     </main>
     <section class="score">
         <div>score:</div>

@@ -46,9 +46,9 @@ padding: 30px;
     align-items: center;
     height: 140px;
     width: 100px;
-    background-color: #fff;
+    background-color: transparent;
     border-radius: 0.20em;
-    border: 1px solid #c3c3c3;
+    border: 1px solid black;
   /* Scale and set the background settings. */
     background-repeat: no-repeat;
     background-position: center center;
@@ -104,11 +104,6 @@ footer {
     padding: 10px;
     height: 30px;
     font-size: 10px;
-}
-
-#shuffled-deck-container,
-#master-deck-container {
-    display: none;
 }
 
 .card.diamonds.K,
