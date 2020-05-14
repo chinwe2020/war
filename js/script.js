@@ -1,13 +1,15 @@
 /*----- constants -----*/
 const player = {
 
-    'playerOne': {
+    '1': {
             name: '',
+            score: 0
            
     },
 
-    'playerTwo': {
+    '-1': {
             name: '',
+            score: 0
     }
 }
 
@@ -26,24 +28,26 @@ let turn;
 
 /*----- app's state (variables) -----*/
 
-// let winner;
+let winner;
 
-// let score; 
+let score; 
+
+let result; 
 
 /*----- cached element references -----*/
 
 
 /*----- event listeners -----*/
 
-const startButton = document.querySelector('shuffle');
+const startButton = document.querySelector('.shuffle');
 const startGame = document.getElementById('shuffle');
 startButton.addEventListener('click', shuffleAndDeal);
 
-const dealButtonOne = document.querySelector('dealButtonOne');
+const dealButtonOne = document.querySelector('.dealButtonOne');
 const cardContainerOne = document.getElementById('card1');
 dealButtonOne.addEventListener('click', handleClick);
 
-const dealButtonTwo = document.querySelector('dealButtonTwo');
+const dealButtonTwo = document.querySelector('.dealButtonTwo');
 const cardContainerTwo = document.getElementById('card2');
 dealButtonTwo.addEventListener('click', handleClick);
 
@@ -59,6 +63,7 @@ function init() {
 
 function shuffleAndDeal() {
 buildPlayerDecks();
+
   turn = 1;
 }
 
@@ -66,11 +71,11 @@ function handleClick() {
   let cardEl;
   if(turn === 1) {
     faceCard1 = deck1.shift();
-    cardEl = `<div class"card ${card.faceCard1.face}">${card.faceCard1.face}</div>`
+    cardEl = `<div class"card ${faceCard1.face}"></div>`
     cardContainerOne.innerHTML = cardEl;
   } else {
     faceCard2 = deck2.shift();
-    cardEl = `<div class"card ${card.faceCard2.face}">${card.faceCard1.face}</div>`
+    cardEl = `<div class"card ${faceCard2.face}"></div>`
     cardContainerTwo.innerHTML = cardEl;
   }
     turn *= -1
