@@ -19,6 +19,13 @@ body {
     margin: 0;
   }
 
+h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(233, 34, 37, 0.961);
+}
+
 .players {
     display: flex;
     justify-content: space-evenly;
@@ -42,8 +49,7 @@ padding: 30px;
 
 .card{
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: center;
     height: 140px;
     width: 100px;
     background-color: transparent;
@@ -58,6 +64,10 @@ padding: 30px;
     text-indent: 100%;
     white-space: nowrap;
     overflow: hidden;
+}
+
+.face-container {
+  border: none;
 }
 
 img {
@@ -80,7 +90,7 @@ img {
     align-items: center;  
 }
 
-.reset {
+#reset {
     
     font-size: 16px;
     background-color: white;
@@ -90,7 +100,7 @@ img {
     cursor: pointer;
 }
 
-.reset:hover {
+#reset:hover {
     color: red;
     background-color: black;
     border-color: white;

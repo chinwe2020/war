@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./images/card-deck-css/css/cardstarter.css">
+    <link rel="stylesheet" href="./css/style.css">
     <script defer src="./js/script.js"></script>
     <title>WAR</title>
 </head>
 <body>
     <header>I DE-CLARE WAR!!!!</header>
+    <h2 id="msg"></h2>
     <section class="players">
         <div class="playerOne">Player 1:</div>
         <div class="playerTwo">Player 2:</div>
@@ -27,8 +28,8 @@
         </div>
 
         <div class="backCard">
-            <img src="./images/card-deck-css/images/backs/red.svg" alt="mainDeck" id="mainDeck">
             <button class="shuffle" id="shuffle">START</button>
+            
         </div>
 
         <div class="card" id="faceCard">
@@ -42,11 +43,11 @@
 
     </main>
     <section class="score">
-        <div>score:</div>
-        <div>score:</div>
+        <div id="score1">Score:</div>
+        <div id="score2">Score:</div>
     </section>
     <section class="resetButton">
-    <button class="reset">RESTART</button>
+         <button id="reset">RESTART</button>
     </section>
     <footer>created with ☮️ and &hearts; by Chinwe' Watkins</footer>
 </body>

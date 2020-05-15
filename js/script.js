@@ -1,43 +1,36 @@
-/*----- constants -----*/
-const player = {
+const deck1 = [];
+const deck2 = [];
+
+let deckOne = [];
+let deckTwo = [];
+
+const players = {
 
     '1': {
-            name: '',
-            score: 0
+            playersDeck: deckOne,
+            score: 26
            
     },
 
     '-1': {
-            name: '',
-            score: 0
+            playersDeck: deckTwo,
+            score: 26
     }
 }
 
 const suits = ['s', 'c', 'd', 'h'];
-const ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
-// Build a 'master' deck of 'card' objects used to create shuffled decks
+const ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A']
 
 const masterDeck = buildMasterDeck();
 let shuffledDeck = cardShuffle(masterDeck);
-const deck1 = [];
-const deck2 = [];
 buildPlayerDecks();
+
 let faceCard1 = deck1.shift();
 let faceCard2 = deck2.shift();
 let turn;
-
-/*----- app's state (variables) -----*/
-
 let winner;
-
 let score; 
-
-let result; 
-
-/*----- cached element references -----*/
-
-
-/*----- event listeners -----*/
+let cardsInPlay = [];
 
 const startButton = document.querySelector('.shuffle');
 const startGame = document.getElementById('shuffle');
@@ -51,39 +44,107 @@ const dealButtonTwo = document.querySelector('.dealButtonTwo');
 const cardContainerTwo = document.getElementById('card2');
 dealButtonTwo.addEventListener('click', handleClick);
 
+const msgEl = document.getElementById('msg');
 
+const scoreOneEl = document.getElementById('score1')
 
-/*----- functions -----*/
+const scoreTwoEl = document.getElementById('score2')
+
+const restart = document.querySelector('.resetButton')
+const reset = document.getElementById('reset')
+restart.addEventListener('click', restartGame)
 
 init();
 
 function init() {
   buildMasterDeck();
+  turn = 1;
+  winner = null;
+  msgEl.innerHTML = `Click Start to Deal to Deck`;
 }
+
+function buildMasterDeck() {
+  const deck = [];
+suits.forEach(function(suit) {
+      ranks.forEach(function(rank) {
+        deck.push({
+          face: `${suit}${rank}`,
+          value: Number(rank) || (rank === 'J' ? 11 : rank === 'Q' ? 12 : rank === 'K' ? 13 : 14)
+      })
+    }) 
+  })
+  return deck;  
+};
 
 function shuffleAndDeal() {
-buildPlayerDecks();
-
-  turn = 1;
+  buildPlayerDecks();
+  msgEl.innerHTML = `Player 1's Turn`;
 }
+
+function checkForWin() {
+  if(cardsInPlay[0].value < cardsInPlay[1].value) {
+    deckOne.unshift(cardsInPlay);
+    score = deckOne.length;
+    msgEl.innerHTML = `Player 1 Wins this Hand!`;
+    cardsInPlay.splice(0,2); 
+    winner = turn;
+    cardContainerOne.innerHTML = "";
+    cardContainerTwo.innerHTML = "";
+  } else if(cardsInPlay[1].value < cardsInPlay[0].value) {
+    deckTwo.unshift(cardsInPlay);
+    score = deckTwo.length;
+    msgEl.innerHTML = `Player 2 Wins this hand!`;
+    cardsInPlay.splice(0,2);
+    winner = turn * -1;
+    cardContainerOne.innerHTML = "";
+    cardContainerTwo.innerHTML = "";
+  } else if(cardsInPlay[1].value = cardsInPlay[0].value) {
+    msgEl.innerHTML = "Tie! I DE-CLARE WAR";
+  }
+  winGame();
+}
+
+function winGame() {
+  if( deck1.length === 0 && deck2.length === 0 ){
+    if( deckOne.length > deckTwo.length ){
+      msgEl.innerHTML = `Player 1 Wins!!!`;
+    } else if( deckOne.length < deckTwo.length ){
+      msgEl.innerHTML = `Player 2 Wins!!!`;
+      } 
+    } else {
+    switchTurn();
+  }
+}
+
+function switchTurn() {
+    turn *= -1
+  }
 
 function handleClick() {
   let cardEl;
   if(turn === 1) {
+    msgEl.innerHTML = `Player 2's Turn`;
     faceCard1 = deck1.shift();
-    cardEl = `<div class"card ${faceCard1.face}"></div>`
+    cardEl = `<div class="card ${faceCard1.face}"></div>`
     cardContainerOne.innerHTML = cardEl;
-  } else {
-    faceCard2 = deck2.shift();
-    cardEl = `<div class"card ${faceCard2.face}"></div>`
-    cardContainerTwo.innerHTML = cardEl;
-  }
-    turn *= -1
+    cardsInPlay.unshift(faceCard1);
 }
-  
-//split shuffled deck of card into 2 decks and empty shuffledDeck array
-function buildPlayerDecks() {
+   else if(turn === -1) {
+    msgEl.innerHTML = `Player 1's Turn`;
+    faceCard2 = deck2.shift();
+    cardEl = `<div class="card ${faceCard2.face}"></div>`
+    cardContainerTwo.innerHTML = cardEl;
+    cardsInPlay.unshift(faceCard2);
+  } 
+  turn *= -1;
+}
 
+function scorePoint(){
+  checkForWin();
+
+}
+
+function buildPlayerDecks() {
       for(let i = 0; i < shuffledDeck.length; i++) { 
           if(i%2 === 0) {
             deck1.push(shuffledDeck[i])
@@ -93,8 +154,7 @@ function buildPlayerDecks() {
       }
       shuffledDeck.splice(0, shuffledDeck.length);
   }
-    
-//shuffle array of cards
+
 function cardShuffle(arr) {
     let newPos,
         temp;
@@ -108,16 +168,11 @@ function cardShuffle(arr) {
     return arr;
   }
 
-//build array of cards
-function buildMasterDeck() {
-    const deck = [];
-	suits.forEach(function(suit) {
-        ranks.forEach(function(rank) {
-          deck.push({
-            face: `${suit}${rank}`,
-            value: Number(rank)
-          });
-        });
-      });
-      return deck;
+function restartGame() {
+  buildMasterDeck();
+    turn = 1;
+      faceCard1 = undefined
+      faceCard2 = undefined
+        cardContainerOne.innerHTML = "";
+        cardContainerTwo.innerHTML = "";
     }
