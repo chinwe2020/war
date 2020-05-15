@@ -6,6 +6,7 @@ WELCOME TO 'WAR'!
 
 Wireframe
 ![war wireframe](./images/War_Wireframe.png)
+![war game](./images/screenshot1) 
 
 ## Technologies
 
@@ -19,60 +20,6 @@ Each player turns up a card at the same time and the player with the higher card
 
 ## Future Enhancements
 
-## Pseudocode
-
-1) Define required constants
-    - 1.1 define players (one and two[computer?])
-    - 1.2 define how to win (playerOneCard > player2card) || (player2card > player1card)
-    - 1.3 define deck
-        1.3.1 show the deck
-        1.3.2 shuffle the deck
-        1.3.3 divide the deck  
-
-2) Define required variables used to track the state of the game
-    - 2.1 redefine each players half deck
-    - 2.2 define varible turn to determine whos turn it is to show a card  
-    - 2.3 use an array to iterate through the half deck 
-    - 2.4 define var to dertemine who wins the hand and adds it to their score
-    - 2.5 define var to keep score
-
-3) Store elements on the page that will be accessed in code more than once in variables to make code more concise, readable and performant.
-    - 3.1 store gameboard
-    - 3.2 store deck
-        - 3.2.1 store deck shuffle(randomization)
-    - 3.3 store game play 
-        - 3.3.1 if one card > other card = winner
-        - 3.3.2 if both cards are equal; add 3 face down cards and one face up card on top
-        - 3.3.3 if player does not have enough cards to go to war, declare loss
-        - 3.3.4 loop back to 3.3.1 logic
-    - 3.4 store score
-        - 3.4.1 store score for each hand
-        - 3.4.2 store score for game to dertemine winner
-    - 3.5 store win logic
-        - 3.5.1 determine number of cards in each deck
-        - 3.5.2 store function to determine value of each card
-        - 3.5.3 store flipped card
-        - 3.5.4 store function to determine which value is greater
-
-4) Upon loading the app should:
-	- 4.1 Initialize the gameboard, the deck/cards, turns, and winner to null to start the game
-	- 4.2 Render those values to the page
-        - 4.2.1 the board:
-            - 4.2.1 begin with only decks face down
-            - 4.2.2 message whose turn it is
-            - 4.2.3 wait for user to click the deck
-            - 4.2.4 loop through card deck and    display cards for both players 
-
-5) Handle a player clicking the deck
-	- 5.1 Obtain the index of the card that was prduced by clicking the deck
-	- 5.2 If the card on the board has a value at the index, immediately return because that card has been used.
-	- 5.3 If winner is not null, immediately return because the game is over.
-	- 5.4 Update the card array at the index with the value of turn.
-	- 5.5 change turns 
-	- 5.6 Set the winner variable if there's a winner:
-		- 5.6.1 card = winningCard function
-		- 5.6.2 Total up the number of winningHands
-		- 5.6.3 If the one player's total is greater than the other players total, we have a winner! Exit the game.play().
-
-6) Handle a player clicking the replay button
-    - 6.1) Do steps 4.1 (initialize the state variables) and 4.2 (render).
+- audio
+- score
+- responsive design
