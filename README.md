@@ -6,8 +6,8 @@ Wireframe
 ![war wireframe](./images/War_Wireframe.png)
 
 Game Play 
-![start game](./images/startgame.png)
-![game play](./images/gameplay.png)
+![start game](~/code/war/images/startgame.png)
+![game play](~/code/war/images/gameplay.png)
 
 ## Technologies
 
