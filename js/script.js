@@ -145,7 +145,7 @@ function switchTurn() {
 
 function handleClick() {
   let cardEl;
-  if(deck1.length === 0 || deck2.length === 0){
+  if(deck1.length === 0 && deck2.length === 0){
     return;
   }
   if(turn === 1) {
