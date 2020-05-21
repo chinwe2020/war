@@ -4,11 +4,10 @@ I DE-CLARE WAR!!!!
 
 Wireframe
 ![war wireframe](./images/War_Wireframe.png)
-![war game](./images/screenshot1) 
 
 Game Play 
-![start game](~/code/war/images/startgame.png)
-![game play](~/code/war/images/gameplay.png)
+![start game](./images/startgame.png)
+![game play](./images/gameplay.png)
 
 ## Technologies
 

@@ -145,6 +145,9 @@ function switchTurn() {
 
 function handleClick() {
   let cardEl;
+  if(deck1.length === 0 || deck2.length === 0){
+    return;
+  }
   if(turn === 1) {
     turnMsgEl.innerHTML = `Player 2's Turn`;
     faceCard1 = deck1.shift();
