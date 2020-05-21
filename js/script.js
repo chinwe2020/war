@@ -1,5 +1,5 @@
-const deck1 = [];
-const deck2 = [];
+let deck1 = [];
+let deck2 = [];
 
 let deckOne = [];
 let deckTwo = [];
@@ -8,33 +8,33 @@ const players = {
 
     '1': {
             playersDeck: deckOne,
-            score: 26
+            score1: 0
            
     },
 
     '-1': {
             playersDeck: deckTwo,
-            score: 26
+            score2: 0
     }
 }
 
 const suits = ['s', 'c', 'd', 'h'];
 const ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A']
 
-const masterDeck = buildMasterDeck();
-let shuffledDeck = cardShuffle(masterDeck);
-buildPlayerDecks();
+
 
 let faceCard1 = deck1.shift();
 let faceCard2 = deck2.shift();
 let turn;
 let winner;
-let score; 
+let score1;
+let score2; 
 let cardsInPlay = [];
+let shuffledDeck;
 
 const startButton = document.querySelector('.shuffle');
 const startGame = document.getElementById('shuffle');
-startButton.addEventListener('click', shuffleAndDeal);
+startButton.addEventListener('click', initGame);
 
 const dealButtonOne = document.querySelector('.dealButtonOne');
 const cardContainerOne = document.getElementById('card1');
@@ -44,11 +44,16 @@ const dealButtonTwo = document.querySelector('.dealButtonTwo');
 const cardContainerTwo = document.getElementById('card2');
 dealButtonTwo.addEventListener('click', handleClick);
 
-const msgEl = document.getElementById('msg');
+const winMsgEl = document.getElementById('winMsg');
+const turnMsgEl = document.getElementById('turnMsg')
 
-const scoreOneEl = document.getElementById('score1')
+const scoreOneEl = document.querySelector('.score')
+const scoreContainerOne = document.getElementById('score1')
+scoreOneEl.addEventListener('input', scorePoint)
 
-const scoreTwoEl = document.getElementById('score2')
+const scoreTwoEl = document.querySelector('.score')
+const scoreContainerTwo = document.getElementById('score2')
+scoreTwoEl.addEventListener('input', scorePoint)
 
 const restart = document.querySelector('.resetButton')
 const reset = document.getElementById('reset')
@@ -57,10 +62,16 @@ restart.addEventListener('click', restartGame)
 init();
 
 function init() {
-  buildMasterDeck();
+
+  const masterdeck = buildMasterDeck();
+  shuffledDeck = cardShuffle(masterdeck);
+  buildPlayerDecks();
+  score1 = 0;
+  score2 = 0;
   turn = 1;
   winner = null;
-  msgEl.innerHTML = `Click Start to Deal to Deck`;
+  winMsgEl.innerHTML = `Click Start to Deal to Deck`;
+  turnMsgEl.innerHTML = ``
 }
 
 function buildMasterDeck() {
@@ -76,30 +87,38 @@ suits.forEach(function(suit) {
   return deck;  
 };
 
-function shuffleAndDeal() {
-  buildPlayerDecks();
-  msgEl.innerHTML = `Player 1's Turn`;
+function initGame() {
+  turnMsgEl.innerHTML = `Player 1's Turn`;
+}
+
+
+function runGame() {
+  if(cardsInPlay.length % 2 == 0) {
+    setTimeout(checkForWin, 1500);
+  }
 }
 
 function checkForWin() {
   if(cardsInPlay[0].value < cardsInPlay[1].value) {
     deckOne.unshift(cardsInPlay);
-    score = deckOne.length;
-    msgEl.innerHTML = `Player 1 Wins this Hand!`;
+    score1++;
+    winMsgEl.innerHTML = `Player 1 Wins this Hand!`;
+    scoreContainerOne.innerHTML = "Score: " + score1;
     cardsInPlay.splice(0,2); 
     winner = turn;
     cardContainerOne.innerHTML = "";
     cardContainerTwo.innerHTML = "";
   } else if(cardsInPlay[1].value < cardsInPlay[0].value) {
     deckTwo.unshift(cardsInPlay);
-    score = deckTwo.length;
-    msgEl.innerHTML = `Player 2 Wins this hand!`;
+    score2++;
+    winMsgEl.innerHTML = `Player 2 Wins this hand!`;
+    scoreContainerTwo.innerHTML = "Score: " + score2;
     cardsInPlay.splice(0,2);
     winner = turn * -1;
     cardContainerOne.innerHTML = "";
     cardContainerTwo.innerHTML = "";
   } else if(cardsInPlay[1].value = cardsInPlay[0].value) {
-    msgEl.innerHTML = "Tie! I DE-CLARE WAR";
+    winMsgEl.innerHTML = "Tie! I DE-CLARE WAR";
   }
   winGame();
 }
@@ -107,41 +126,55 @@ function checkForWin() {
 function winGame() {
   if( deck1.length === 0 && deck2.length === 0 ){
     if( deckOne.length > deckTwo.length ){
-      msgEl.innerHTML = `Player 1 Wins!!!`;
+      winMsgEl.innerHTML = `Player 1 Wins!!!`;
+      turnMsgEl.innerHTML = ``
     } else if( deckOne.length < deckTwo.length ){
-      msgEl.innerHTML = `Player 2 Wins!!!`;
-      } 
+      winMsgEl.innerHTML = `Player 2 Wins!!!`;
+      turnMsgEl.innerHTML = ``
+      } else if (deckOne.length = deckTwo.length) {
+        winMsgEl.innerHTML = `Tie Game!!! Click Restart and Play Again`;
+      }
     } else {
     switchTurn();
   }
 }
 
 function switchTurn() {
-    turn *= -1
-  }
+      turn *= -1
+}
 
 function handleClick() {
   let cardEl;
   if(turn === 1) {
-    msgEl.innerHTML = `Player 2's Turn`;
+    turnMsgEl.innerHTML = `Player 2's Turn`;
     faceCard1 = deck1.shift();
     cardEl = `<div class="card ${faceCard1.face}"></div>`
     cardContainerOne.innerHTML = cardEl;
     cardsInPlay.unshift(faceCard1);
 }
    else if(turn === -1) {
-    msgEl.innerHTML = `Player 1's Turn`;
+    turnMsgEl.innerHTML = `Player 1's Turn`;
     faceCard2 = deck2.shift();
     cardEl = `<div class="card ${faceCard2.face}"></div>`
     cardContainerTwo.innerHTML = cardEl;
     cardsInPlay.unshift(faceCard2);
+    runGame();
   } 
-  turn *= -1;
+  turn = -1;
 }
 
-function scorePoint(){
-  checkForWin();
+function scorePoint() {
+ let value = 0;
 
+ if(value = deckOne.length) {
+    score1 = value;
+    return `Score: ${value}`; 
+  }
+
+ if(value = deckTwo.length) {
+  score2 = value;
+  return `Score: ${value}`; 
+  }
 }
 
 function buildPlayerDecks() {
@@ -169,10 +202,17 @@ function cardShuffle(arr) {
   }
 
 function restartGame() {
-  buildMasterDeck();
-    turn = 1;
-      faceCard1 = undefined
-      faceCard2 = undefined
-        cardContainerOne.innerHTML = "";
-        cardContainerTwo.innerHTML = "";
-    }
+  deck1 = [];
+  deck2 = [];
+  cardsInPlay = [];
+  scoreContainerOne.innerHTML = "Score: ";
+  scoreContainerTwo.innerHTML = "Score: ";
+  score1 = 0;
+  score2 = 0;
+  init();
+  cardContainerOne.innerHTML = "";
+  cardContainerTwo.innerHTML = "";
+  turnMsgEl.innerHTML = "";
+  winMsgEl.innerHTML = `Click Start to Deal to Deck`;
+}
+  
